@@ -1,0 +1,21 @@
+//Phan 1
+1/SELECT * FROM user ORDER BY(user.user_name) ASC;
+2/SELECT * FROM user ORDER BY(user.user_name) ASC LIMIT 7;
+3/SELECT * FROM user WHERE user.user_name LIKE '%a%' ORDER BY(user.user_name) ASC;
+4/SELECT * FROM user WHERE user.user_name LIKE 'm%';
+5/SELECT * FROM user WHERE user.user_name LIKE '%i';
+6/SELECT * FROM `user` WHERE user.user_email LIKE "%gmail.com%";
+7/SELECT * FROM `user` WHERE user.user_email LIKE "%gmail.com%" AND user.user_name LIKE 'm%';
+8/SELECT * FROM `user`WHERE user.user_email LIKE '%gmail.com%' AND user.user_name LIKE '%i%' AND LENGTH(user.user_name) > 5;
+9/
+10/
+//phan 2
+1/SELECT user.user_id, user.user_name, `order`.order_id FROM `order` JOIN user ON user.user_id = `order`.order_id;
+3/SELECT `order_details`.`order_id` , `order_details`.`product_id` FROM `order_details`;
+4/SELECT `user`.`user_id`, `user`.`user_name`, `order`.`order_id`, `product`.`product_name` FROM `order_details` JOIN `order` ON `order_details`.`order_id` = `order`.`order_id` JOIN `product` on `product`.`product_id` = `order_details`.`product_id` JOIN `user` on `user`.`user_id` = `order`.`user_id` GROUP BY `order`.`order_id`;
+6/SELECT `user`.`user_id`, `user`.`user_name`, `order`.`order_id`, `product`.`product_name`
+FROM `order_details` 
+JOIN `order` ON `order_details`.`order_id` = `order`.`order_id` JOIN `product` on `product`.`product_id` = `order_details`.`product_id` JOIN `user` on `user`.`user_id` = `order`.`user_id` 
+WHERE `product`.`product_name` LIKE "%SamSung" or `product`.`product_name` LIKE "%Apple%"
+GROUP BY `user`.`user_id`
+LIMIT 7
